@@ -22,6 +22,11 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+DROP DATABASE IF EXISTS clothingshop;
+CREATE DATABASE clothingshop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE clothingshop;
+
+SET FOREIGN_KEY_CHECKS=0;
 
 --
 -- Estructura de tabla para la tabla `cart`
@@ -47,6 +52,13 @@ CREATE TABLE `orders` (
   `status` enum('pending','completed','cancelled') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO `orders` (`id`, `user_id`, `status`) VALUES
+(1, 6, 'completed'),
+(2, 6, 'completed'),
+(3, 8, 'completed'),
+(4, 8, 'pending'),
+(5, 6, 'pending'),
+(65, 6, 'pending');
 -- --------------------------------------------------------
 
 --

@@ -1,0 +1,60 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: clothingshop
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: 123
+      TZ: Europe/Madrid
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --sql-mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      # usa la misma root pass (123) que has configurado arriba
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -p123 --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  php:
+    build:
+      context: ./docker/php
+    environment:
+      DB_HOST: db
+      DB_NAME: clothingshop
+      DB_USER: appuser
+      DB_PASS: 123
+      TZ: Europe/Madrid
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:4
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  db_data:
