@@ -26,7 +26,6 @@ $showSearch = false;
     <title>Registro</title>
 
     <!-- Estilos globales -->
-    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/register.css">
 
     <!-- Scripts comunes de la navbar -->

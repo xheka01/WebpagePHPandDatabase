@@ -5,6 +5,7 @@ $current = basename($_SERVER['SCRIPT_NAME'] ?? '');
 $hideByDefault = in_array($current, ['login.php','register.php', 'cart.php']);
 $showSearch = isset($showSearch) ? (bool)$showSearch : !$hideByDefault;
 ?>
+<link rel="stylesheet" href="css/navbar.css">
 <div class="nav-bar">
     <?php if ($showSearch): ?>
     <div class="search-container">

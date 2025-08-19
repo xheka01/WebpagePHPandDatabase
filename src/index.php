@@ -26,6 +26,7 @@ if ($search !== '') {
 $stmt = $pdo->prepare("SELECT id, name, description, price, image_path FROM products $where ORDER BY id DESC LIMIT 50");
 $stmt->execute($params);
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BW</title>
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/navbar.css">
     <script>
         function toggleSettings() {
             const settingsMenu = document.getElementById('settingsMenu');

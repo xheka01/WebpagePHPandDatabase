@@ -39,7 +39,6 @@ $showSearch = false;
         }
     </script>
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
     <?php require __DIR__ . '/navbar.php'; ?>

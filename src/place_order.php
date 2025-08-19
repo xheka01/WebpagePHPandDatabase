@@ -7,7 +7,6 @@ if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
     header("Location: login.php");
     exit();
 }
-
 // Only process the order if this is a POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -55,6 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['order_error'] = "Failed to process your order. Please try again.";
     }
 }
+
+$showSearch = false;
 ?>
 
 <!DOCTYPE html>
@@ -69,22 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-        }
-        .navbar {
-            background-color: #343a40;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .navbar a:hover {
-            text-decoration: underline;
         }
         .container {
             text-align: center;
@@ -116,14 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">ShopName</div>
-        <div>
-            <a href="index.php">Home</a>
-            <a href="cart.php">Cart</a>
-            <a href="logout.php">Logout</a>
-        </div>
-    </div>
+    <?php require __DIR__ . '/navbar.php'; ?>
     <div class="container">
         <?php if(isset($_SESSION['order_success'])): ?>
             <div class="message success">Order placed successfully! Thank you for your purchase.</div>
