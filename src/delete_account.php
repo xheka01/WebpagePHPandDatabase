@@ -33,7 +33,7 @@ try {
     $stmt->execute([$_SESSION['user_id']]);
     
     // Delete user
-    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE users SET is_deleted = 1 WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     
     // Commit transaction

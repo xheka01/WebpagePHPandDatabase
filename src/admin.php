@@ -110,7 +110,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([$_POST['user_id']]);
                 
                 // Then delete the user
-                $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+                $stmt = $pdo->prepare("UPDATE users SET is_deleted = 1 WHERE id = ?");
                 $stmt->execute([$_POST['user_id']]);
                 break;
 

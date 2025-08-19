@@ -1,0 +1,165 @@
+/* ===== NAVBAR ===== */
+
+/* Fondo de la barra a ancho completo (full-bleed) */
+.nav-bar {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    background: linear-gradient(to right, #2c3e50, #3498db);
+    color: #fff;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    z-index: 1000;
+}
+
+/* Orden y comportamiento por defecto (desktop) */
+.nav-left  { order: 1; display: flex; align-items: center; gap: 16px; }
+.search-container { order: 2; flex: 1 1 420px; }
+.nav-right { order: 3; display: flex; align-items: center; gap: 16px; }
+
+/* Enlaces */
+.nav-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.nav-bar a:hover,
+.nav-bar a:focus-visible {
+    background-color: rgba(255,255,255,.12);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    outline: none;
+}
+
+/* ===== Buscador ===== */
+.search-container { max-width: 900px; margin: 0 8px; }
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.search-form input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.15);
+    color: #fff;
+    border-radius: 6px;
+    transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+.search-form input::placeholder { color: rgba(255,255,255,.85); }
+
+.search-form input:focus {
+    outline: none;
+    border-color: #fff;
+    background: rgba(255,255,255,.25);
+    box-shadow: 0 0 0 3px rgba(255,255,255,.25);
+}
+
+.search-form button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #333;
+    color: #fff;
+    transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.search-form button:hover,
+.search-form button:focus-visible {
+    background: #444;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    outline: none;
+}
+
+/* ===== Menú de ajustes ===== */
+.settings-container { position: relative; display: inline-block; }
+
+.settings-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    transition: transform .25s ease, background-color .2s ease;
+}
+.settings-button:hover,
+.settings-button:focus-visible {
+    transform: rotate(45deg);
+    background-color: rgba(255,255,255,.12);
+    outline: none;
+}
+
+.settings-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+
+    background: #fff;
+    color: #333;
+    min-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    overflow: hidden;
+    z-index: 2000;
+
+    animation: slideDown .2s ease;
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-menu a,
+.settings-menu form {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color .15s ease, padding-left .15s ease;
+}
+
+.settings-menu a:hover {
+    background: #f7f8fa;
+    padding-left: 22px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .nav-left, .nav-right { gap: 12px; }
+    .search-container { flex-basis: 360px; }
+}
+
+@media (max-width: 768px) {
+    /* En móvil, que la búsqueda ocupe su propia fila completa */
+    .nav-left  { order: 1; width: auto; }
+    .search-container { order: 3; width: 100%; flex: 1 1 100%; }
+    .nav-right { order: 2; margin-left: auto; }
+
+    .search-form { gap: 8px; }
+    .search-form button { padding: 10px 14px; }
+}
+
+@media (max-width: 420px) {
+    .nav-left a, .nav-right a { padding: 6px 8px; }
+    .search-form input[type="text"] { padding: 9px 10px; }
+}

@@ -16,7 +16,7 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute([$_SESSION['user_id']]);
 $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+$showSearch = false;
 ?>
 
 <!DOCTYPE html>
@@ -38,39 +38,11 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         }
     </script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
-    <div class="nav-bar">
-        <div class="nav-left">
-            <a href="index.php">Home</a>
-            <?php if(isset($_SESSION['user_id'])): ?>
-                <?php if($_SESSION['role'] === 'admin'): ?>
-                    <a href="admin.php">Admin Panel</a>
-                <?php endif; ?>
-                <a href="cart.php">Cart</a>
-                <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-            <?php endif; ?>
-        </div>
-        
-        <div class="nav-right">
-            <?php if(isset($_SESSION['user_id'])): ?>
-                <div class="settings-container">
-                    <button onclick="toggleSettings()" class="settings-button">⚙️</button>
-                    <div id="settingsMenu" class="settings-menu">
-                        <a href="logout.php">Logout</a>
-                        <form id="deleteForm" action="delete_account.php" method="POST" style="margin: 0;">
-                            <a href="#" onclick="confirmDelete()">Delete Account</a>
-                        </form>
-                        <a href="about.php">About Us</a>
-                    </div>
-                </div>
-            <?php else: ?>
-                <a href="login.php">Login</a>
-                <a href="register.php">Register</a>
-            <?php endif; ?>
-        </div>
-    </div>
+    <?php require __DIR__ . '/navbar.php'; ?>
 
     <div class="cart-section">
         <h2 class="section-title">Your Shopping Cart</h2>
