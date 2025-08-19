@@ -103,6 +103,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin-bottom: 1.5rem;
         }
     </style>
+    <script src="js/register.js"></script>
 </head>
 <body>
     <div class="register-container">

@@ -38,7 +38,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
